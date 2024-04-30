@@ -67,7 +67,8 @@ const simpleSandpackConfig: SandpackConfig = {
 const Editor: FC<EditorProps> = ({ markdown, editorRef }) => {
   return (
     <MDXEditor
-      className="prose"
+      className="bg-base-200 rounded-md"
+      contentEditableClassName="prose mt-0 mb-0"
       onChange={(e) => console.log(e)}
       ref={editorRef}
       markdown={markdown}
