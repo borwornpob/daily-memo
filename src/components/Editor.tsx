@@ -9,6 +9,7 @@ import {
   CreateLink,
   InsertCodeBlock,
   InsertSandpack,
+  InsertTable,
   ListsToggle,
   MDXEditor,
   MDXEditorMethods,
@@ -23,6 +24,7 @@ import {
   markdownShortcutPlugin,
   quotePlugin,
   sandpackPlugin,
+  tablePlugin,
   toolbarPlugin,
 } from "@mdxeditor/editor";
 import { FC } from "react";
@@ -32,33 +34,6 @@ interface EditorProps {
   markdown: string;
   editorRef?: React.MutableRefObject<MDXEditorMethods | null>;
 }
-
-const defaultSnippetContent = `
-export default function App() {
-  return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
-  );
-}
-`.trim();
-
-const simpleSandpackConfig: SandpackConfig = {
-  defaultPreset: "react",
-  presets: [
-    {
-      label: "React",
-      name: "react",
-      meta: "live react",
-      sandpackTemplate: "react",
-      sandpackTheme: "light",
-      snippetFileName: "/App.js",
-      snippetLanguage: "jsx",
-      initialSnippetContent: defaultSnippetContent,
-    },
-  ],
-};
 
 /**
  * Extend this Component further with the necessary plugins or props you need.
@@ -80,8 +55,8 @@ const Editor: FC<EditorProps> = ({ markdown, editorRef }) => {
               <UndoRedo />
               <BoldItalicUnderlineToggles />
               <CreateLink />
-              <CodeToggle />
               <ListsToggle />
+              <InsertTable />
               <BlockTypeSelect />
               <ConditionalContents
                 options={[
@@ -90,14 +65,9 @@ const Editor: FC<EditorProps> = ({ markdown, editorRef }) => {
                     contents: () => <ChangeCodeMirrorLanguage />,
                   },
                   {
-                    when: (editor) => editor?.editorType === "sandpack",
-                    contents: () => <ShowSandpackInfo />,
-                  },
-                  {
                     fallback: () => (
                       <>
                         <InsertCodeBlock />
-                        <InsertSandpack />
                       </>
                     ),
                   },
@@ -112,10 +82,10 @@ const Editor: FC<EditorProps> = ({ markdown, editorRef }) => {
         linkPlugin(),
         quotePlugin(),
         codeBlockPlugin({ defaultCodeBlockLanguage: "js" }),
-        sandpackPlugin({ sandpackConfig: simpleSandpackConfig }),
         codeMirrorPlugin({
           codeBlockLanguages: { js: "JavaScript", css: "CSS" },
         }),
+        tablePlugin(),
       ]}
     />
   );
