@@ -1,6 +1,6 @@
 // NoteCard.tsx
 "use client";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const NoteCard = (props: {
   id: number;
@@ -8,6 +8,7 @@ export const NoteCard = (props: {
   date: string;
   preview: string;
 }) => {
+  const router = useRouter();
   return (
     <div className="card card-compact w-96 bg-base-100 shadow-xl">
       <div className="card-body">
@@ -19,7 +20,7 @@ export const NoteCard = (props: {
             className="btn btn-secondary"
             onClick={() => {
               // redirect to note page
-              redirect(`/daily/${props.id}`);
+              router.push(`/daily/${props.id}`);
             }}
           >
             Edit!
