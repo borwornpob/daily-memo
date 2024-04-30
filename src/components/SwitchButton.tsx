@@ -11,7 +11,7 @@ export const SwitchButton = ({
     <>
       {!checked ? (
         <button
-          className="btn btn-xs btn-primary mr-4"
+          className="btn btn-xs btn-primary"
           onClick={() => {
             onChange(false);
           }}
@@ -20,7 +20,7 @@ export const SwitchButton = ({
         </button>
       ) : (
         <button
-          className="btn btn-xs btn-secondary mr-4"
+          className="btn btn-xs btn-secondary"
           onClick={() => {
             onChange(true);
           }}
