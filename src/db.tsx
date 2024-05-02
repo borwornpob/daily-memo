@@ -68,3 +68,7 @@ export const validateRequest = cache(
     return result;
   }
 );
+
+export const validateRequestServer = (sessionId: string) => {
+  return lucia.validateSession(sessionId);
+}

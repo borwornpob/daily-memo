@@ -2,10 +2,20 @@ import { lucia, validateRequest } from "root/db";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
-export default function Page() {
+export default async function Page() {
+  const { user } = await validateRequest();
+  if (!user) {
+    return redirect("/login");
+  }
+
   return (
     <form action={logout}>
-      <button type="submit">Sign out</button>
+      <div className="container mx-auto p-4 space-y-2">
+        <p className="text-3xl font-bold">Sign out</p>
+        <button className="btn btn-primary" type="submit">
+          Sign out
+        </button>
+      </div>
     </form>
   );
 }
