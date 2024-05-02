@@ -64,6 +64,9 @@ export const Navbar = async () => {
                     </a>
                   </li>
                 ))}
+                <a className="btn btn-secondary" href="/login/">
+                  Sign in
+                </a>
               </ul>
             </div>
           </div>
@@ -84,6 +87,9 @@ export const Navbar = async () => {
                 </a>
               </li>
             ))}
+            <a className="btn btn-secondary" href="/login/">
+              Sign in
+            </a>
           </ul>
         </div>
       </div>

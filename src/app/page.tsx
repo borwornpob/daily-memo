@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className="container mx-auto p-4">
+      <p className="text-3xl font-bold">Welcome to Daily Notes!</p>
     </div>
   );
 }

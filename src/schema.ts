@@ -13,6 +13,7 @@ export const user = pgTable("user", {
   id: text("id").primaryKey(),
   profileId: text("profile_id")
     .unique()
+    .notNull()
     .references(() => profile.id),
   githubId: text("github_id").unique(),
   username: text("username").unique(),
@@ -20,8 +21,8 @@ export const user = pgTable("user", {
 
 export const profile = pgTable("profile", {
   id: text("id").primaryKey(),
-  firstName: text("first_name"),
-  lastName: text("last_name"),
+  firstName: text("first_name").notNull().default(""),
+  lastName: text("last_name").notNull().default(""),
 });
 
 export const session = pgTable("session", {
@@ -40,7 +41,7 @@ export const note = pgTable("note", {
   userId: text("user_id")
     .notNull()
     .references(() => user.id),
-  content: text("content").notNull(),
+  content: text("content").notNull().default(""),
   createdAt: timestamp("created_at", {
     withTimezone: true,
   }).notNull(),
