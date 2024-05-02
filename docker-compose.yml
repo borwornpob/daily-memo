@@ -1,13 +1,12 @@
 version: "3"
 services:
   db:
-    image: postgres:9.6
+    image: postgres:latest
     ports:
       - "1111:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: dailynote
     volumes:
       - ./data:/var/lib/postgresql/data
-    restart: always

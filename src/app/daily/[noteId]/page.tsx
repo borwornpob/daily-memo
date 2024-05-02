@@ -3,7 +3,6 @@ const EditorComp = dynamic(() => import("root/components/Editor"), {
 });
 import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
-import Tiptap from "root/components/Tiptap";
 
 export default function Page({ params }: { params: { noteId: string } }) {
   return (

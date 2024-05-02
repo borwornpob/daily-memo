@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   serial,
   text,
@@ -31,3 +32,30 @@ export const session = pgTable("session", {
     mode: "date",
   }).notNull(),
 });
+
+export const note = pgTable("note", {
+  id: text("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at", {
+    withTimezone: true,
+  }).notNull(),
+});
+
+export const userRelation = relations(user, ({ one, many }) => ({
+  UserProfile: one(profile, {
+    fields: [user.profileId],
+    references: [profile.id],
+  }),
+
+  Notes: many(note),
+}));
+
+export const noteRelation = relations(note, ({ one }) => ({
+  User: one(user, {
+    fields: [note.userId],
+    references: [user.id],
+  }),
+}));
