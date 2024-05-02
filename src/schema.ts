@@ -11,9 +11,11 @@ export const schema = pgSchema("note");
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
-  profileId: text("id")
+  profileId: text("profile_id")
     .unique()
     .references(() => profile.id),
+  githubId: text("github_id").unique(),
+  username: text("username").unique(),
 });
 
 export const profile = pgTable("profile", {
