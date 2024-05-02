@@ -11,3 +11,15 @@
 .prose blockquote {
   margin: 0;
 }
+
+.mdxeditor-toolbar {
+  background-color: inherit !important;
+}
+
+._tooltipTrigger_r5eta_634 {
+  background-color: inherit !important;
+}
+
+._selectTrigger {
+  background-color: --var(--b1);
+}
