@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 
 export const NoteCard = (props: {
-  id: number;
+  id: string;
   title: string;
   date: string;
   preview: string;

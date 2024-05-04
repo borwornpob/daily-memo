@@ -27,8 +27,6 @@ export async function GET(request: Request): Promise<Response> {
     });
     const githubUser: GitHubUser = await githubUserResponse.json();
 
-    console.log(githubUser);
-
     // Replace this with your own DB client.
     const existingUser = await db.query.user.findFirst({
       where: eq(schema.user.githubId, githubUser.id),
@@ -51,10 +49,20 @@ export async function GET(request: Request): Promise<Response> {
     }
 
     const userId = generateIdFromEntropySize(10); // 16 characters long
+    const profileId = generateIdFromEntropySize(10); // 16 characters long
+    const firstName = githubUser.name?.split(" ")[0] ?? "";
+    const lastName = githubUser.name?.split(" ")[1] ?? "";
+
+    await db.insert(schema.profile).values({
+      id: profileId,
+      firstName: firstName,
+      lastName: lastName,
+    });
 
     // Replace this with your own DB client.
     await db.insert(schema.user).values({
       id: userId,
+      profileId: profileId,
       githubId: githubUser.id,
       username: githubUser.login,
     });
@@ -90,4 +98,5 @@ export async function GET(request: Request): Promise<Response> {
 interface GitHubUser {
   id: string;
   login: string;
+  name: string | null;
 }
